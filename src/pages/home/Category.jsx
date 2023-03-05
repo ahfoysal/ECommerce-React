@@ -10,7 +10,7 @@ const Category = ({ctg , setCtg ,active ,setActive}) => {
 
 
 
-    const ctgName =  allProducts.map(product => {
+    const ctgName =  allProducts?.map(product => {
         return product.categories.map(categories => ( categories.name))})
         const merged = [].concat.apply([], ctgName);
         let uniqueChars = [...new Set(merged)];
