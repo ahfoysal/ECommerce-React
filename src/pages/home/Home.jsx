@@ -5,6 +5,7 @@
 import { useState } from "react";
 import { useContext, useEffect } from "react";
 import { TestContext } from "../../App";
+import { useContextS } from "../cart/Function";
 import AllProducts from "./AllProducts";
 import Category from "./Category";
 import './home.css'
@@ -12,6 +13,8 @@ import './home.css'
 
 
   function Home() {
+    let {  allProducts  } =  useContextS();
+
     const {    setActiveTabCart, setActiveTabOrder,setActiveTabHome, setActiveTabUser, setHeaderActive} = useContext(TestContext);
     useEffect(() => {
       setActiveTabCart(false)
@@ -22,15 +25,38 @@ import './home.css'
     
     }, [])
     
-    const [ctg , setCtg] = useState([]);
     const [active , setActive] = useState('all');
+    const [activeCategory, setActiveCategory] = useState([])
     
+
+
+    const getProduct = (id) =>{
+       
+      setActive(id)
+      if(id === 'all'){
+          return setActiveCategory(allProducts.slice(0,12))
+      }
+      const cartItems = allProducts.map((cart)=> {
+          return cart.categories.map(cat => (cart)).filter((val)=> {
+            return val.categories[0].name === id
+                });          
+          });
+      
+        const merged = [].concat.apply([], cartItems);
+        let uniqueChars = [...new Set(merged)];
+       
+      setActiveCategory(uniqueChars)
+      
+      }
+
+
+
 
   return (
 
     <div className="home-page" > 
-<Category  ctg={ctg} setCtg={setCtg} active={active} setActive={setActive}  />
-    <AllProducts />
+<Category   active={active}  setActive={setActive}  getProduct={getProduct}   />
+    <AllProducts   pro={activeCategory.length < 1 ?  allProducts : activeCategory}/>
     
       {/* <Banner /> */}
       {/* <Featured /> */}

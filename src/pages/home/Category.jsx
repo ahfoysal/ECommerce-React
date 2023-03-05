@@ -5,7 +5,7 @@ import '@splidejs/react-splide/css';
 import { useEffect } from 'react';
 
 
-const Category = ({ctg , setCtg ,active ,setActive}) => {
+const Category = ({active ,getProduct, setActive, pro }) => {
     let {  allProducts  } =  useContextS();
 
 
@@ -15,9 +15,7 @@ const Category = ({ctg , setCtg ,active ,setActive}) => {
         const merged = [].concat.apply([], ctgName);
         let uniqueChars = [...new Set(merged)];
       
-        useEffect(() => {
-             setCtg(uniqueChars)
-        }, [allProducts])
+     
     
       
 
@@ -32,10 +30,10 @@ const Category = ({ctg , setCtg ,active ,setActive}) => {
 
         }
       }}>
-        <SplideSlide className={'catergory-bar  test '}><p className={` cat-btn categories__category ${active === 'all' ? 'cat-active' : ' '}`} >All Products</p></SplideSlide>
+        <SplideSlide onClick={() => getProduct('all')} className={'catergory-bar  test '}><p className={` cat-btn categories__category ${active === 'all' ? 'cat-active' : ' '}`} >All Products</p></SplideSlide>
 
-        {ctg.map((ctgn) => {
-  return <SplideSlide className={' catergory-bar'} key={ctgn}>   <p  className={` cat-btn categories__category ${active === ctgn ? 'cat-active' : ' '}`}   > {ctgn}</p> </SplideSlide>
+        {uniqueChars.map((ctgn) => {
+  return <SplideSlide className={' catergory-bar'} onClick={() => getProduct(ctgn)} key={ctgn}>   <p  className={` cat-btn categories__category ${active === ctgn ? 'cat-active' : ' '}`}   > {ctgn}</p> </SplideSlide>
 })}
         </Splide>
       

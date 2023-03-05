@@ -11,6 +11,9 @@ import axios from 'axios';
 // import { UserAuthContextProvider } from './context/UserAuthContext';
 import Header2 from "./components/header/SideBar";
 import {  ContextProviderS } from "./pages/cart/Function";
+import DisableDevtool from 'disable-devtool';
+
+DisableDevtool();
 
 export const TestContext = createContext();
  
