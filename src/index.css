@@ -34,6 +34,10 @@ color: #000;
 
 
 }
+p {
+  margin-top: 0;
+  margin-bottom: 0px !important;
+}
 a {
   color: black !important;
   text-decoration: underline;
@@ -215,7 +219,7 @@ svg.star {
 
 }
 .productSingle__details .productSingle__footer {
-  margin-top: auto;
+  margin-top: 50px;
 }
 .productSingle__price {
   display: flex;
@@ -317,7 +321,7 @@ line-height: 1.2;
 
   .home-page {
      
-      padding: 0px  15px  !important;
+      padding: 0px  0px  !important;
   }
   
   .cart-page {

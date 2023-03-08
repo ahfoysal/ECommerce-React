@@ -20,15 +20,16 @@ const Checkout = () => {
   
   const [isContainerActive, setIsContainerActive] = useState(false);
   const [somethingWentWrong, setSomethingWentWrong] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
-  const [email, setEmail] = useState('');
+  // const [email, setEmail] = useState('');
   const [customerID, setCustomerID] = useState(0);
   const [method, setMethod] = useState("cod");
   const [trxid, setTrxid] = useState('');
   const [radio, setRadio] = useState(false);
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = useState(0);
   
 
 
@@ -52,6 +53,7 @@ const Checkout = () => {
 /////// Create Order
   const createOrder = (e) => {
     e.preventDefault();
+    setIsLoading(true)
 
     /////cart item find
     const cartItems = cart.map((cart) => `{'product_id': ${cart.id},'quantity': ${cart.abc}}` );
@@ -78,18 +80,20 @@ const Checkout = () => {
       fetch(`https://sslcommerz-gateway-yjsc.vercel.app/post`, requestOptions)
         .then(response => response.json())
         .then(result => {
+         
           const rslt = result;
           console.log(rslt)
+          setIsLoading(false)
           // console.log(rslt.id)
           navigate(`/order/${rslt.number}`)  
-          window.location.replace(`https://sslcommerz-gateway.vercel.app/ssl-request/${rslt.total}/${rslt.id}`);
-              
+        if(radio)(window.location.replace(`https://sslcommerz-gateway.vercel.app/ssl-request/${rslt.total}/${rslt.id}`))              
           setCart([]) 
           localStorage.removeItem('shopping_cart');
           })
         .catch(error => {
           const rslt = error;
           console.log('error', rslt)
+          setIsLoading(false)
           setSomethingWentWrong(true)
         });
         
@@ -159,26 +163,16 @@ const Checkout = () => {
   </label>
 </div>
     
-{!radio  && <div>
+ <div>
 <Form onSubmit={createOrder}>
   
 
-      <Button1 variant="warning" type="submit">Checkout</Button1></Form>
- </div>  }
+      <Button1 variant="warning" disabled={isLoading} type="submit">Checkout</Button1>
+      
+      </Form>
+ </div>  
 
-{radio  &&  <div><p>Bkash Number: 01861389963</p>
-<Form onSubmit={createOrder}>
-    <Form.Group as={Row} className="mb-3" controlId="trxid">
-        <Form.Label >
-         Transaction Number
-        </Form.Label>
-        <Col sm="10">
-          <Form.Control required placeholder="trxid" value={trxid} onChange={(e) => setTrxid(e.target.value)}  />
-        </Col>
-        
-      </Form.Group>
-      <Button1 variant="warning" type="submit">Checkout</Button1></Form>
- </div>  }
+
 
            </div>,
     },

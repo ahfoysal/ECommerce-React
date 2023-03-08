@@ -14,7 +14,7 @@ const Header = () => {
   let params = useLocation();
   const param = params.pathname
   const history = useNavigate()
-  const {    setHeaderActive, headerActive, activeTabCart} = useContext(TestContext);
+  const {  activeTabCart } = useContext(TestContext);
     let {  cart } =  useContextS();
 
 
@@ -24,8 +24,8 @@ const Header = () => {
   return (
 
       <>
-    <Navbar className=" header-top  "  >
-      <Container fluid>
+    <Navbar className="header-top"  >
+      <Container fluid >
    
                <div className="head-conatiner ">
             <div>

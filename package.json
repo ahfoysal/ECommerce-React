@@ -29,11 +29,13 @@
     "react-google-button": "^0.7.2",
     "react-hook-form": "^7.39.5",
     "react-icons": "^4.6.0",
+    "react-native-woocommerce-api": "^1.8.8",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.1.1",
     "styled-components": "^5.3.5",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "woocommerce-api-pewds": "^1.0.7"
   },
   "scripts": {
     "start": "react-scripts start",

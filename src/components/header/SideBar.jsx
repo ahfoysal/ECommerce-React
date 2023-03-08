@@ -11,25 +11,27 @@ import NoAccountsIcon2 from '@mui/icons-material/AccountCircle';
 
 // Be sure to include styles at some point, probably during your bootstraping
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { TestContext } from '../../App';
 // import { useUserAuth } from '../context/UserAuthContext';
 import { useContextS } from '../../pages/cart/Function';
 
 const Header2 = () => {
 
+  let params = useLocation();
+  const param = params.pathname
     const {  headerActive} = useContext(TestContext);
 
     let {  cart } =  useContextS();
 
-
-
+console.log(param.includes("product"))
+    
 
     const { activeTabCart, activeTabHome, activeTabOrder,  activeTabUser} = useContext(TestContext);
     // let { user } =  useUserAuth();
 
   return (
-    <SideNav className={`side-nav ${headerActive ? 'active' : ''} bottom-0`} 
+    <SideNav className={`side-nav ${headerActive ? 'active' : ''} bottom-0 ${param.includes("product") && 'display-none'}`} 
     onSelect={(selected) => {
         // Add your code here
     }}

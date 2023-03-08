@@ -16,7 +16,7 @@ export function ContextProviderS({ children }) {
     const [isLoggedIn , setIsloggedIn] = useState(false);
     const [userID , setUserID] = useState('');
 
-
+  
 
 
     
@@ -115,6 +115,7 @@ export function ContextProviderS({ children }) {
 
     const fetchProducts= () =>{
   
+   
       axios(`${process.env.REACT_APP_SHOP_LINK}wp-json/wc/v3/products?${process.env.REACT_APP_KEY}&per_page=100`)
     .then(data2 => { const data = data2
      
@@ -133,11 +134,11 @@ export function ContextProviderS({ children }) {
       if(cookies.get('token')){
         try {
         
-          if(tokens == 'undefined'){
+          if(tokens === 'undefined'){
              return console.log('hi')
           }
           const data = jwt_decode(cookies.get('token'));
-          console.log(data)
+          // console.log(data)
           setUserID(data.id)
           // valid token format
         } catch(error) {
@@ -148,7 +149,8 @@ export function ContextProviderS({ children }) {
         setIsloggedIn(true)
       }
       else(console.log('not logged in'))
-    
+      
+
     }, []);
     return(  
     <contextProviderS.Provider value={{ userID, addToCart, cart, test2 , updateDb, getDb, clearTheCart,removeFromDb, getCart, setCart, setTest2, allProducts, isLoggedIn }}>{children}</contextProviderS.Provider>)
