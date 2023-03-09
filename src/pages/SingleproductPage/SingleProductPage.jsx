@@ -103,11 +103,22 @@ const SingleProductPage = () => {
 <p className='productSingle__price price'>৳{product?.price} {product?.sale_price && <span className=" del">৳{product?.regular_price}</span>}</p>
 {/* <span dangerouslySetInnerHTML={{ __html: details.description }} ></span> */}
 
-      <div className="buttons full-width">
+{variations?.length > 0   &&    <div className="buttons full-width">
       <button className="buy-btn pp-btn full-widths" onClick={() => pressHandler(product)}> <MdAddShoppingCart size={16} color="#FFF" />
         <span>  Add To Cart</span></button>
       
-      </div>
+      </div> }{product?.variations?.length === 0  &&    <div className="buttons full-width">
+      <button className="buy-btn pp-btn full-widths" onClick={() => pressHandler(product)}> <MdAddShoppingCart size={16} color="#FFF" />
+        <span>  Add To Cart</span></button>
+      
+      </div> }
+      {product?.parent_id !== 0  &&     <div className="buttons full-width">
+      <button className="buy-btn pp-btn full-widths" onClick={() => pressHandler(product)}> <MdAddShoppingCart size={16} color="#FFF" />
+        <span>  Add To Cart</span></button>
+      
+      </div> }
+
+
     </div>
   </div>
  </div> 
