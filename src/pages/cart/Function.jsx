@@ -21,6 +21,7 @@ export function ContextProviderS({ children }) {
 
     
     function addToCart(id) {
+      console.log(id)
 
       const newCart = [...cart, id];
       setCart(newCart);
@@ -38,10 +39,6 @@ export function ContextProviderS({ children }) {
         console.log(id)
          
     }
-
-
-
-
 
 
     const getCart = () => {
@@ -100,8 +97,7 @@ export function ContextProviderS({ children }) {
       return exists ? JSON.parse(exists) : {};
     }
     const clearTheCart = () => {
-      // localStorage.setItem('shopping_cart', []);
-      // localStorage.setItem('cartItems', []);
+     
       setCart([]) 
       localStorage.removeItem('shopping_cart');
       console.log(localStorage.getItem('shopping_cart'));
